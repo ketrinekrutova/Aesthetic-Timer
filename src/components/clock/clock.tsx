@@ -1,61 +1,95 @@
-import {useState, useEffect, useRef} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './clock.module.css';
 
+const timeNowSeconds = () => Math.floor(Date.now() / 1000);
 
 function Clock() {
-    const [timer, setTimer] = useState(0);
-    const [isRunning, setIsRunning] = useState(false);
-    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-    const startTimeRef = useRef<number | null>(null);
-    const saveTimerRef = useRef(0);
+    const [isRunning, setIsRunning] = useState(localStorage.getItem('isRunning') === 'true');
+    const [initialTime, setInitialTime] = useState(parseInt(localStorage.getItem('initialTime') ?? '0'));
+    const [timer, setTimer] = useState(parseInt(localStorage.getItem('timer') ?? '0'));
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setIsRunning(false);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('isRunning', isRunning.toString());
+    }, [isRunning]);
+
+    useEffect(() => {
+        localStorage.setItem('initialTime', initialTime.toString());
+    }, [initialTime]);
+
+    useEffect(() => {
+        localStorage.setItem('timer', timer.toString());
+    }, [timer]);
+
+    useEffect(() => {
+        let interval: number = 0;
         if (isRunning) {
-            intervalRef.current = setInterval(() => {
-                setTimer(Date.now() - startTimeRef.current!);
-            }, 10);
-        } else if (intervalRef.current !== null) {
-            clearInterval(intervalRef.current);
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setTimer(timeNowSeconds() - initialTime);
+
+            interval = setInterval(() => setTimer(
+                timeNowSeconds() - initialTime
+            ), 1000);
+
+            return () => {
+                clearInterval(interval);
+            }
+        } else {
+            clearInterval(interval);
         }
-
-
-        return () => clearInterval(intervalRef.current !== null ? intervalRef.current : undefined);
     }, [isRunning]);
 
     const startTimer = () => {
-        startTimeRef.current = Date.now() - saveTimerRef.current;
+        setInitialTime(timeNowSeconds());
         setIsRunning(true);
     };
 
-    const stopTimer = () => {
+    const pauseTimer = () => {
         setIsRunning(false);
-        saveTimerRef.current = timer;
     };
 
+    const resumeTimer = () => {
+        setIsRunning(true);
+        setInitialTime(timeNowSeconds() - timer);
+    }
+
     const resetTimer = () => {
+        setInitialTime(timeNowSeconds());
         setIsRunning(false)
         setTimer(0);
-        saveTimerRef.current = 0;
-        startTimeRef.current = null;
     };
 
     const formatTime = (timer: number) => {
-        const seconds = `${Math.floor(timer / 1000) % 60}`.padStart(2, '0');
-        const minutes = `${Math.floor(timer / 60000) % 60}`.padStart(2, '0');
-        const hours = `${Math.floor(timer / 3600000)}`.padStart(2, '0');
+        const seconds = `${timer % 60}`.padStart(2, '0');
+        const minutes = `${Math.floor(timer / 60) % 60}`.padStart(2, '0');
+        const hours = `${Math.floor(timer / 60 / 60)}`.padStart(2, '0');
 
         return `${hours}:${minutes}:${seconds}`;
     };
 
     return (
-        <div  className={styles.container}>
-            <div  className={styles.digit}>
+        <div className={styles.container}>
+            <div className={styles.digit}>
                 {formatTime(timer)}
             </div>
             <div className='buttons'>
-                <button onClick={startTimer} className={styles.btn}>Start</button>
-                <button onClick={stopTimer} className={styles.btn}>Stop</button>
+                {isRunning && (
+                    <button onClick={pauseTimer} className={styles.btn}>Pause</button>
+                )}
+
+                {!isRunning && timer === 0 && (
+                    <button onClick={startTimer} className={styles.btn}>Start</button>
+                )}
+                {!isRunning && timer !== 0 && (
+                    <button onClick={resumeTimer} className={styles.btn}>Resume</button>
+                )}
+
                 <button onClick={resetTimer} className={styles.btn}>Reset</button>
+
             </div>
         </div>
     );
