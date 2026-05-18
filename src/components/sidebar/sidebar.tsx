@@ -6,16 +6,14 @@ function Sidebar({ isOpen, onClose}: { isOpen: boolean, onClose: () => void }) {
 
     return (
         <div className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}>
+        <div className={styles.titleAndClose}>
         <h1>Theme</h1>
-            <button className={styles.btn} onClick={onClose}><X size={24} /></button>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-            </p>
+        <button className={styles.btn} onClick={onClose}><X size={20} /></button>
+        </div>
             <h2>Backgrounds</h2>
+            <p>Тут будут фоны.</p>
             <h2>Clock fonts</h2>
+            <p>Тут будут шрифты для часов.</p>
         </div>);
 }
 
