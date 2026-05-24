@@ -10,17 +10,22 @@
 }
 
 .digit, .timer_sep {
-    font-size: 180px;
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
-
+    clip-path: inset(1px 0 0 0);
+    font-size: clamp(40px, 12vw, 176px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: -0.05em;
 }
 
 
 .btn {
-    font-size: 24px;
-    width: 120px;
+    font-size: clamp(16px, 2vw, 24px);
+    width: clamp(80px, 10vw, 120px);
     padding: 10px 15px;
     border-radius: 10px;
     margin: 10px;
