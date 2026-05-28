@@ -12,13 +12,11 @@
     padding: 20px;
     z-index: 1000;
     color: white;
-
 }
 
 .sidebarOpen {
     transform: translateX(0);
 }
-
 
 .btn {
     font-size: clamp(12px, 2vw, 22px);
@@ -38,18 +36,69 @@
 .drawer {
     top: 0;
     left: 0;
-    position:fixed;
-    width:100%;
-    height:100%;
-    z-index:999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
 .drawerOpen {
-    background:rgba(0,0,0,.7);
+    background: rgba(0, 0, 0, .7);
     opacity: 1;
     pointer-events: auto;
 }
 
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 4px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+    width: 100px;
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cardActive {
+    border-color: white;
+}
+
+.cardImage {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.fontPreview {
+    width: 100px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+}
+
+.cardLabel {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}

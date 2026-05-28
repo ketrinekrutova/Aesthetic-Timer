@@ -1,9 +1,14 @@
+import green from './green.jpg';
+import pink from './pink.jpg';
+import leopard from './leopard.jpg';
+import polkaDot from './polka-dot.jpg';
+
 export const backgrounds = [
-    { id: 'black', name: 'Black', src: '/backgrounds/black.jpg' },
-    { id: 'green_aura', name: 'Green Aura', src: '/backgrounds/green.jpg' },
-    { id: 'pink_aura', name: 'Pink Aura', src: '/backgrounds/pink.jpg' },
-    { id: 'leopard', name: 'Leopard Print', src: '/backgrounds/leopard.jpg' },
-    { id: 'polka_dots', name: 'Polka dots', src: '/backgrounds/polka-dot.jpg' }
+    { id: 'black', name: 'Black', src: '' },
+    { id: 'green_aura', name: 'Green Aura', src: green },
+    { id: 'pink_aura', name: 'Pink Aura', src: pink },
+    { id: 'leopard', name: 'Leopard Print', src: leopard },
+    { id: 'polka_dots', name: 'Polka dots', src: polkaDot },
 ];
 
 export const fonts = [

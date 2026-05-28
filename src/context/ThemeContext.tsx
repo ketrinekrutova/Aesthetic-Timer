@@ -1,4 +1,5 @@
-import { createContext, useState} from 'react';
+import { createContext, useState } from 'react';
+import type { ReactNode } from 'react';
 
 type ThemeContextType = {
     backgroundId: string;
@@ -7,19 +8,33 @@ type ThemeContextType = {
     setFontId: (id: string) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType>({
-    backgroundId: 'black',
-    fontId: 'default',
-    setBackgroundId: () => {},
-    setFontId: () => {},
-});
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [backgroundId, setBackgroundId] = useState('black');
-    const [fontId, setFontId] = useState('default');
+export function ThemeProvider({ children }: { children: ReactNode }) {
+    const [backgroundId, setBackgroundId] = useState<string>(() => {
+        return localStorage.getItem('backgroundId') || 'green';
+    });
+    const [fontId, setFontId] = useState<string>(() => {
+        return localStorage.getItem('fontId') || 'default';
+    });
+
+    const handleSetBackgroundId = (id: string) => {
+        setBackgroundId(id);
+        localStorage.setItem('backgroundId', id);
+    };
+
+    const handleSetFontId = (id: string) => {
+        setFontId(id);
+        localStorage.setItem('fontId', id);
+    };
 
     return (
-        <ThemeContext.Provider value={{ backgroundId, fontId, setBackgroundId, setFontId }}>
+        <ThemeContext.Provider value={{
+            backgroundId,
+            fontId,
+            setBackgroundId: handleSetBackgroundId,
+            setFontId: handleSetFontId
+        }}>
             {children}
         </ThemeContext.Provider>
     );

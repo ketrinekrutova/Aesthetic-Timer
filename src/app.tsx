@@ -3,10 +3,16 @@ import Sidebar from './components/sidebar/sidebar';
 import {useEffect, useState} from "react";
 import styles from './App.module.css';
 import {Settings, Maximize, Minimize} from 'lucide-react';
+import {useTheme} from './hooks/useTheme';
+import {backgrounds, fonts} from './data/theme';
 
 function App() {
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const {backgroundId, fontId} = useTheme();
+
+    const currentBg = backgrounds.find(bg => bg.id === backgroundId);
+    const currentFont = fonts.find(f => f.id === fontId);
 
     function toggleSidebar() {
         return setIsOpen(!isOpen);
@@ -27,7 +33,16 @@ function App() {
     }
 
     return (
-        <div className='App'>
+        <div
+            className='App'
+            style={{
+                backgroundImage: currentBg?.src ? `url(${currentBg.src})` : undefined,
+                backgroundColor: currentBg?.src ? undefined : 'black',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                fontFamily: currentFont?.fontFamily,
+            }}
+        >
             <Clock/>
             <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)}/>
             <div className={styles.position_btn}>
