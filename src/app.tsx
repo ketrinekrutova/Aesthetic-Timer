@@ -15,7 +15,7 @@ function App() {
     const currentFont = fonts.find(f => f.id === fontId);
 
     function toggleSidebar() {
-        return setIsOpen(!isOpen);
+        setIsOpen(!isOpen);
     }
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
         if (document.fullscreenElement) {
             document.exitFullscreen();
         } else {
-            return document.documentElement.requestFullscreen();
+            document.documentElement.requestFullscreen();
         }
     }
 

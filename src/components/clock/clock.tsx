@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 import styles from './clock.module.css';
+import {useTheme} from '../../hooks/useTheme';
+import {fonts} from '../../data/theme';
 
 const timeNowSeconds = () => Math.floor(Date.now() / 1000);
 
@@ -7,6 +9,9 @@ function Clock() {
     const [isRunning, setIsRunning] = useState(localStorage.getItem('isRunning') === 'true');
     const [initialTime, setInitialTime] = useState(parseInt(localStorage.getItem('initialTime') ?? '0'));
     const [timer, setTimer] = useState(parseInt(localStorage.getItem('timer') ?? '0'));
+
+    const {fontId} = useTheme();
+    const currentFont = fonts.find(f => f.id === fontId);
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -73,7 +78,10 @@ function Clock() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.digit}>
+            <div className={styles.digit} style={{
+                fontFamily: currentFont?.fontFamily,
+                fontSize: `clamp(40px, ${currentFont?.fontSize}vw, ${currentFont?.fontSizeMax}px)`
+            }}>
                 {formatTime(timer)}
             </div>
             <div className='buttons'>

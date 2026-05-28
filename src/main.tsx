@@ -5,9 +5,9 @@ import App from './app'
 import {ThemeProvider} from './context/ThemeContext'
 
 createRoot(document.getElementById('root')!).render(
-    <ThemeProvider>
-        <StrictMode>
+    <StrictMode>
+        <ThemeProvider>
             <App/>
-        </StrictMode>
-    </ThemeProvider>,
+        </ThemeProvider>
+    </StrictMode>,
 )

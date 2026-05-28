@@ -12,7 +12,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
     const [backgroundId, setBackgroundId] = useState<string>(() => {
-        return localStorage.getItem('backgroundId') || 'green';
+        return localStorage.getItem('backgroundId') || 'black';
     });
     const [fontId, setFontId] = useState<string>(() => {
         return localStorage.getItem('fontId') || 'default';

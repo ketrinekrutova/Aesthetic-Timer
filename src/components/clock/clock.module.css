@@ -5,16 +5,13 @@
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: black;
     color: white;
 }
 
 .digit, .timer_sep {
-    font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
     clip-path: inset(1px 0 0 0);
-    font-size: clamp(40px, 12vw, 176px);
     display: inline-flex;
     align-items: center;
     justify-content: center;
