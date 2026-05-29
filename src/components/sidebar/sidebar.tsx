@@ -24,7 +24,7 @@ function Sidebar({isOpen, onClose}: { isOpen: boolean, onClose: () => void }) {
                             className={`${styles.card} ${backgroundId === bg.id ? styles.cardActive : ''}`}
                             onClick={() => setBackgroundId(bg.id)}
                         >
-                            <img src={bg.src} alt={bg.name} className={styles.cardImage}/>
+                            {bg.src ? <img src={bg.src} alt={bg.name} className={styles.cardImage}/> : null}
                             <span className={styles.cardLabel}>{bg.name}</span>
                         </div>
                     ))}
@@ -38,7 +38,7 @@ function Sidebar({isOpen, onClose}: { isOpen: boolean, onClose: () => void }) {
                             className={`${styles.card} ${fontId === font.id ? styles.cardActive : ''}`}
                             onClick={() => setFontId(font.id)}
                         >
-                            <span className={styles.fontPreview} style={{fontFamily: font.fontFamily}}>Aa</span>
+                            <span className={styles.fontPreview} style={{fontFamily: font.fontFamily, letterSpacing: font.letterSpacing}}>Aa</span>
                             <span className={styles.cardLabel}>{font.name}</span>
                         </div>
                     ))}

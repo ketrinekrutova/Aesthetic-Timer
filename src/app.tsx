@@ -37,7 +37,6 @@ function App() {
             className='App'
             style={{
                 backgroundImage: currentBg?.src ? `url(${currentBg.src})` : undefined,
-                backgroundColor: currentBg?.src ? undefined : 'black',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 fontFamily: currentFont?.fontFamily,
