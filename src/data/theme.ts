@@ -11,17 +11,18 @@ type Background = {
     id: string;
     name: string;
     src: string;
+    textColor: string;
 }
 
 export const backgrounds: Background[] = [
-    { id: 'black', name: 'Black', src: black },
-    { id: 'green_aura', name: 'Green Aura', src: green },
-    { id: 'pink_aura', name: 'Pink Aura', src: pink },
-    { id: 'leopard', name: 'Leopard Print', src: leopard },
-    { id: 'polka_dots', name: 'Polka dots', src: polkaDot },
-    { id: 'plain', name: 'Plain', src: plain },
-    { id: 'refraction', name: 'Refraction', src: refraction },
-    { id: 'sea', name: 'Sea', src: sea },
+    { id: 'black', name: 'Black', src: black, textColor: 'white' },
+    { id: 'green_aura', name: 'Green Aura', src: green, textColor: 'black' },
+    { id: 'pink_aura', name: 'Pink Aura', src: pink, textColor: 'white' },
+    { id: 'leopard', name: 'Leopard Print', src: leopard, textColor: 'white' },
+    { id: 'polka_dots', name: 'Polka dots', src: polkaDot, textColor: 'white' },
+    { id: 'plain', name: 'Plain', src: plain, textColor: 'white' },
+    { id: 'refraction', name: 'Refraction', src: refraction, textColor: 'black' },
+    { id: 'sea', name: 'Sea', src: sea, textColor: 'white' },
 ];
 
 type Font = {

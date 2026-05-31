@@ -26,7 +26,7 @@ function Clock() {
                     <button onClick={startTimer} className={styles.btn}>Start</button>
                 )}
                 {!isRunning && timer !== 0 && (
-                    <button onClick={resumeTimer} className={styles.btn}>Resume</button>
+                    <button onClick={resumeTimer} className={styles.btn}>Start</button>
                 )}
 
                 <button onClick={resetTimer} className={styles.btn}>Reset</button>
