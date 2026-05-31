@@ -4,15 +4,14 @@ import {useEffect, useState} from "react";
 import styles from './App.module.css';
 import {Settings, Maximize, Minimize} from 'lucide-react';
 import {useTheme} from './hooks/useTheme';
-import {backgrounds, fonts} from './data/theme';
+import {backgrounds} from './data/theme';
 
 function App() {
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
-    const {backgroundId, fontId} = useTheme();
+    const {backgroundId} = useTheme();
 
     const currentBg = backgrounds.find(bg => bg.id === backgroundId);
-    const currentFont = fonts.find(f => f.id === fontId);
 
     function toggleSidebar() {
         setIsOpen(!isOpen);
@@ -39,7 +38,6 @@ function App() {
                 backgroundImage: currentBg?.src ? `url(${currentBg.src})` : undefined,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                fontFamily: currentFont?.fontFamily,
             }}
         >
             <Clock/>
